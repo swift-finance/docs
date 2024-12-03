@@ -1,0 +1,98 @@
+---
+title: Risk Score
+---
+
+## Calculating Risk Scores with Polyglot ML and OpenAI + Anthropic LLMs
+
+Swift leverages advanced machine learning models and large language models (LLMs) from OpenAI and Anthropic to calculate risk scores for various financial events. Our polyglot ML approach ensures that we can handle diverse data sources and provide accurate risk assessments.
+
+### Overview of Risk Score Calculation
+
+1. **Data Ingestion**: We collect data from multiple sources, including transaction records, account activities, and external data feeds.
+2. **Feature Engineering**: Relevant features are extracted and transformed to create a comprehensive dataset for model training and inference.
+3. **Model Training**: We use a combination of supervised and unsupervised learning techniques to train our models. This includes anomaly detection, clustering, and classification algorithms.
+4. **LLM Integration**: OpenAI and Anthropic LLMs are used to enhance the model's understanding of complex patterns and relationships within the data.
+5. **Risk Scoring**: The trained models generate risk scores for different types of events, which are then used to detect potential fraud, assess account risk, and provide actionable insights.
+
+### Fetching Risk Scores for Different Events
+
+Below are code examples demonstrating how to fetch risk scores for three different types of events: transactions, account logins, and account funding transfers.
+
+#### Example 1: Fetching Risk Score for a Transaction
+
+```python
+import requests
+import json
+
+def fetch_risk_score_for_transaction(transaction_id, api_key):
+    url = f"https://api.joinswift.app/v1/risk/transaction/{transaction_id}"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        risk_score = response.json().get("risk_score")
+        print(f"Risk Score for Transaction {transaction_id}: {risk_score}")
+    else:
+        print(f"Failed to fetch risk score: {response.text}")
+
+# Example usage
+transaction_id = "12345"
+api_key = "<your-api-key>"
+fetch_risk_score_for_transaction(transaction_id, api_key)
+```
+
+#### Example 2: Fetching Risk Score for an Account Login
+```python
+import requests
+import json
+
+def fetch_risk_score_for_account_login(account_id, api_key):
+    url = f"https://api.joinswift.app/v1/risk/account_login/{account_id}"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        risk_score = response.json().get("risk_score")
+        print(f"Risk Score for Account Login {account_id}: {risk_score}")
+    else:
+        print(f"Failed to fetch risk score: {response.text}")
+
+# Example usage
+account_id = "67890"
+api_key = "<your-api-key>"
+fetch_risk_score_for_account_login(account_id, api_key)
+```
+
+#### Example 3: Fetching Risk Score for an Account Funding Transfer
+
+```python
+import requests
+import json
+
+def fetch_risk_score_for_account_funding_transfer(account_id, api_key):
+    url = f"https://api.joinswift.app/v1/risk/account_funding_transfer/{account_id}"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        risk_score = response.json().get("risk_score")
+        print(f"Risk Score for Account Funding Transfer {account_id}: {risk_score}")
+    else:
+        print(f"Failed to fetch risk score: {response.text}")
+
+# Example usage
+account_id = "54321"
+api_key = "<your-api-key>"
+fetch_risk_score_for_account_funding_transfer(account_id, api_key)
+
+```
+

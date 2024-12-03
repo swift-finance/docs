@@ -1,0 +1,1097 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI spec for Swift Customer Data Processing and Risk Score",
+    "description": "A specification for Swift's customer data processing and risk score APIs",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://sandbox.mintlify.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/events/account-activity": {
+      "post": {
+        "tags": ["Account Activity"],
+        "summary": "Log account activity event",
+        "description": "Log account activity events like balance checks, statement downloads, etc.",
+        "requestBody": {
+          "description": "Account activity event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountActivityEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Event logged successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse" 
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid event data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Account Activity"],
+        "summary": "Retrieve account activity events",
+        "description": "Retrieve account activity events with optional filtering",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "query",
+            "description": "Filter by account ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query", 
+            "description": "Filter by start date",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "Filter by end date",
+            "schema": {
+              "type": "string", 
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of account activity events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountActivityEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/auth": {
+      "post": {
+        "tags": ["Account Activity"],
+        "summary": "Log authentication event",
+        "description": "Log authentication events like logins, logouts, and password changes",
+        "requestBody": {
+          "description": "Authentication event details", 
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Auth event logged successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/password-reset": {
+      "post": {
+        "tags": ["Account Activity"],
+        "summary": "Log password reset event",
+        "description": "Initiate and log password reset events",
+        "requestBody": {
+          "description": "Password reset event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordResetEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Password reset initiated and logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/transfers/ach": {
+      "post": {
+        "tags": ["Transfer Activity"],
+        "summary": "Log ACH transfer event",
+        "description": "Log ACH transfer events",
+        "requestBody": {
+          "description": "ACH transfer event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ACHTransferEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "ACH transfer event logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Transfer Activity"],
+        "summary": "Retrieve ACH transfer events",
+        "description": "Retrieve ACH transfer events",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "query",
+            "description": "Filter by account ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ACH transfer events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ACHTransferEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/transfers/outbound": {
+      "post": {
+        "tags": ["Transfer Activity"],
+        "summary": "Log outbound transfer event",
+        "description": "Log outbound transfer events",
+        "requestBody": {
+          "description": "Outbound transfer event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OutboundTransferEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Outbound transfer event logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/chat": {
+      "post": {
+        "tags": ["Support Activity"],
+        "summary": "Log customer chat event",
+        "description": "Log customer chat events",
+        "requestBody": {
+          "description": "Chat event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Chat event logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Support Activity"],
+        "summary": "Retrieve chat events",
+        "description": "Retrieve chat events",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Filter by customer ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of chat events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/support-tickets": {
+      "post": {
+        "tags": ["Support Activity"],
+        "summary": "Log support ticket event",
+        "description": "Create and log support ticket events",
+        "requestBody": {
+          "description": "Support ticket event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportTicketEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Support ticket created and logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Support Activity"],
+        "summary": "Retrieve support ticket events",
+        "description": "Retrieve support ticket events",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by ticket status",
+            "schema": {
+              "type": "string",
+              "enum": ["open", "closed", "pending"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of support ticket events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SupportTicketEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/custom": {
+      "post": {
+        "summary": "Log custom event",
+        "description": "Log custom/unstructured events",
+        "requestBody": {
+          "description": "Custom event details",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Custom event logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/analytics": {
+      "get": {
+        "summary": "Get analytics and insights across all event types",
+        "description": "Get analytics and insights across all event types",
+        "parameters": [
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "Filter by event type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timeframe",
+            "in": "query",
+            "description": "Analysis timeframe",
+            "schema": {
+              "type": "string",
+              "enum": ["day", "week", "month", "quarter", "year"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event analytics response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventAnalytics"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/streaming/kinesis": {
+      "post": {
+        "tags": ["Streaming"],
+        "summary": "Configure AWS Kinesis stream sink",
+        "description": "Configure AWS Kinesis as a destination for streaming event data",
+        "requestBody": {
+          "description": "Kinesis configuration details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["streamName", "region", "credentials"],
+                "properties": {
+                  "streamName": {
+                    "type": "string",
+                    "description": "Name of the Kinesis stream"
+                  },
+                  "region": {
+                    "type": "string", 
+                    "description": "AWS region of the stream"
+                  },
+                  "credentials": {
+                    "type": "object",
+                    "required": ["accessKeyId", "secretAccessKey"],
+                    "properties": {
+                      "accessKeyId": {
+                        "type": "string",
+                        "description": "AWS access key ID"
+                      },
+                      "secretAccessKey": {
+                        "type": "string",
+                        "description": "AWS secret access key"
+                      }
+                    }
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether streaming to this sink is enabled",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Kinesis sink configured successfully"
+          }
+        }
+      }
+    },
+    "/streaming/fivetran": {
+      "post": {
+        "tags": ["Streaming"],
+        "summary": "Configure Fivetran connector sink", 
+        "description": "Configure Fivetran as a destination for streaming event data",
+        "requestBody": {
+          "description": "Fivetran configuration details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["connectorId", "apiKey"],
+                "properties": {
+                  "connectorId": {
+                    "type": "string",
+                    "description": "Fivetran connector ID"
+                  },
+                  "apiKey": {
+                    "type": "string",
+                    "description": "Fivetran API key"
+                  },
+                  "schema": {
+                    "type": "string",
+                    "description": "Target schema name"
+                  },
+                  "enabled": {
+                    "type": "boolean", 
+                    "description": "Whether streaming to this sink is enabled",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fivetran sink configured successfully"
+          }
+        }
+      }
+    },
+    "/streaming/sinks": {
+      "get": {
+        "tags": ["Streaming"],
+        "summary": "List configured streaming sinks",
+        "description": "Get a list of all configured streaming data sinks",
+        "responses": {
+          "200": {
+            "description": "List of configured sinks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Unique identifier for the sink"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": ["kinesis", "fivetran"],
+                        "description": "Type of streaming sink"
+                      },
+                      "enabled": {
+                        "type": "boolean",
+                        "description": "Whether the sink is enabled"
+                      },
+                      "config": {
+                        "type": "object",
+                        "description": "Sink-specific configuration"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/risk/score/{objectId}": {
+      "get": {
+        "tags": ["Risk Scoring"],
+        "summary": "Get risk score for an object",
+        "description": "Retrieve the AI-generated risk score and analysis for a specific object ID",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Unique identifier of the object to score",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Risk score retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objectId": {
+                      "type": "string",
+                      "description": "The ID of the scored object"
+                    },
+                    "riskScore": {
+                      "type": "number",
+                      "format": "float",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Risk score between 0 (low risk) and 1 (high risk)"
+                    },
+                    "riskFactors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "factor": {
+                            "type": "string",
+                            "description": "Description of the risk factor"
+                          },
+                          "severity": {
+                            "type": "string",
+                            "enum": ["low", "medium", "high"],
+                            "description": "Severity level of this risk factor"
+                          }
+                        }
+                      },
+                      "description": "List of identified risk factors"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "When the risk score was calculated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Plant": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the plant",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
+      "NewPlant": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plant"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identification number of the plant",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "required": [
+          "error",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AccountActivityEvent": {
+        "required": [
+          "accountId",
+          "eventType",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "description": "Unique identifier for the account",
+            "type": "string"
+          },
+          "eventType": {
+            "description": "Type of account activity (e.g. balance_check, statement_download)",
+            "type": "string",
+            "enum": [
+              "balance_check",
+              "statement_download",
+              "profile_update",
+              "settings_change"
+            ]
+          },
+          "timestamp": {
+            "description": "Time when the event occurred",
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "description": "Additional event-specific details",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "AuthEvent": {
+        "required": [
+          "userId",
+          "eventType",
+          "timestamp",
+          "ipAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "description": "Unique identifier for the user",
+            "type": "string"
+          },
+          "eventType": {
+            "description": "Type of authentication event",
+            "type": "string",
+            "enum": [
+              "login_success",
+              "login_failure",
+              "logout",
+              "password_change",
+              "mfa_enabled",
+              "mfa_disabled"
+            ]
+          },
+          "timestamp": {
+            "description": "Time when the auth event occurred",
+            "type": "string",
+            "format": "date-time"
+          },
+          "ipAddress": {
+            "description": "IP address where the auth event originated",
+            "type": "string"
+          },
+          "userAgent": {
+            "description": "User agent string from the client",
+            "type": "string"
+          },
+          "location": {
+            "description": "Geographic location details",
+            "type": "object",
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "PasswordResetEvent": {
+        "required": [
+          "userId",
+          "requestId",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "description": "Unique identifier for the user",
+            "type": "string"
+          },
+          "requestId": {
+            "description": "Unique identifier for the password reset request",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Time when the password reset was initiated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "description": "Current status of the password reset",
+            "type": "string",
+            "enum": [
+              "initiated",
+              "email_sent",
+              "completed",
+              "expired",
+              "cancelled"
+            ]
+          },
+          "expiresAt": {
+            "description": "When the reset token expires",
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "description": "Additional reset-specific details",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "EventResponse": {
+        "required": [
+          "eventId",
+          "status"
+        ],
+        "type": "object", 
+        "properties": {
+          "eventId": {
+            "description": "Unique identifier for the logged event",
+            "type": "string"
+          },
+          "status": {
+            "description": "Status of the event logging",
+            "type": "string",
+            "enum": ["success", "failed"]
+          },
+          "timestamp": {
+            "description": "Time when the event was logged",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ACHTransferEvent": {
+        "required": [
+          "accountId",
+          "amount",
+          "transferType",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "description": "ID of the account initiating/receiving the transfer",
+            "type": "string"
+          },
+          "amount": {
+            "description": "Transfer amount in cents",
+            "type": "integer",
+            "minimum": 0
+          },
+          "transferType": {
+            "description": "Type of ACH transfer",
+            "type": "string",
+            "enum": ["credit", "debit"]
+          },
+          "timestamp": {
+            "description": "When the transfer was initiated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "description": "Current status of the transfer",
+            "type": "string",
+            "enum": ["pending", "processing", "completed", "failed", "returned"]
+          },
+          "metadata": {
+            "description": "Additional transfer-specific details",
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "OutboundTransferEvent": {
+        "required": [
+          "accountId",
+          "amount",
+          "destinationAccount",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "description": "ID of the sending account",
+            "type": "string"
+          },
+          "amount": {
+            "description": "Transfer amount in cents",
+            "type": "integer",
+            "minimum": 0
+          },
+          "destinationAccount": {
+            "description": "Details of the receiving account",
+            "type": "object",
+            "properties": {
+              "accountNumber": {
+                "type": "string"
+              },
+              "routingNumber": {
+                "type": "string"
+              },
+              "accountType": {
+                "type": "string",
+                "enum": ["checking", "savings"]
+              }
+            }
+          },
+          "timestamp": {
+            "description": "When the transfer was initiated",
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "description": "Current status of the transfer",
+            "type": "string",
+            "enum": ["pending", "processing", "completed", "failed"]
+          }
+        }
+      },
+      "ChatEvent": {
+        "required": [
+          "sessionId",
+          "userId",
+          "messageType",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "description": "Unique identifier for the chat session",
+            "type": "string"
+          },
+          "userId": {
+            "description": "ID of the user in the chat",
+            "type": "string"
+          },
+          "messageType": {
+            "description": "Type of chat message",
+            "type": "string",
+            "enum": ["text", "file", "system"]
+          },
+          "content": {
+            "description": "Content of the message",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "When the message was sent",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SupportTicketEvent": {
+        "required": [
+          "ticketId",
+          "customerId", 
+          "subject",
+          "status",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "description": "Unique identifier for the support ticket",
+            "type": "string"
+          },
+          "customerId": {
+            "description": "ID of the customer who created the ticket",
+            "type": "string"
+          },
+          "subject": {
+            "description": "Subject/title of the support ticket",
+            "type": "string"
+          },
+          "description": {
+            "description": "Detailed description of the issue",
+            "type": "string"
+          },
+          "status": {
+            "description": "Current status of the ticket",
+            "type": "string",
+            "enum": ["open", "closed", "pending"]
+          },
+          "priority": {
+            "description": "Priority level of the ticket",
+            "type": "string",
+            "enum": ["low", "medium", "high", "urgent"]
+          },
+          "category": {
+            "description": "Category of the support issue",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "When the ticket was created",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CustomEvent": {
+        "required": [
+          "eventType",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "eventType": {
+            "description": "Custom event type identifier",
+            "type": "string"
+          },
+          "source": {
+            "description": "Source system or application",
+            "type": "string"
+          },
+          "data": {
+            "description": "Custom event payload",
+            "type": "object"
+          },
+          "metadata": {
+            "description": "Additional event metadata",
+            "type": "object"
+          },
+          "timestamp": {
+            "description": "When the event occurred",
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "EventAnalytics": {
+        "type": "object",
+        "properties": {
+          "totalEvents": {
+            "description": "Total number of events in the period",
+            "type": "integer"
+          },
+          "eventsByType": {
+            "description": "Breakdown of events by type",
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer"
+            }
+          },
+          "timeSeriesData": {
+            "description": "Time series of event counts",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

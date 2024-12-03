@@ -1,0 +1,135 @@
+---
+title: Alert Review Queues
+description: 
+---
+
+Alert Queues allow you to streamline and manage alerts effectively, providing a system for tracking issues based on rules or risk levels. This guide will walk you through the process of setting up Alert Queues, assigning alerts, and using them to manage a manual review process.​
+
+## How to Create and Configure an Alert Queue
+Alert queue can be configured based on rule or risk level. Please refer below for step-by-step instruction. Please refer to Rule Editor Guide If you need to create a new rule.
+
+
+## Queue Types
+Swift's Alert Review Queues provide a powerful system for managing and triaging potential fraud alerts and risk signals. This guide explains how to effectively configure and utilize queues to streamline your fraud review process.
+
+## Overview
+Alert Review Queues help financial institutions:
+- Organize alerts based on risk level and type
+- Prioritize high-risk cases for manual review
+- Track review status and outcomes
+- Maintain audit trails of decisions
+- Distribute workload across fraud teams
+
+## Queue Categories
+Swift supports several queue categories to help organize alerts effectively:
+
+### Transaction-Based Queues
+- **Individual Transactions**: Review specific high-risk transactions
+- **Session Activity**: Analyze user session behavior patterns
+- **Payment Flows**: Monitor payment and transfer activities
+
+### Customer-Centric Queues  
+- **Customer Profile**: Aggregate alerts by customer for holistic review
+- **Device Analysis**: Track suspicious device patterns
+- **Business Accounts**: Monitor commercial account activity
+
+### Specialized Queues
+- **Recipient Analysis**: Review patterns related to payment recipients
+- **High-Value Transactions**: Separate queue for large value transfers
+- **Custom Categories**: Create custom queues based on your needs
+
+## Queue Configuration
+
+### Setting Up a New Queue
+1. Navigate to Queue Management in your Swift dashboard
+2. Click "Create New Queue"
+3. Select queue type and category
+4. Configure routing rules and risk thresholds
+5. Assign team members and permissions
+6. Set SLA and priority levels
+
+### Routing Rules
+There are four ways to enqueue an entity (session, customer, device, or transaction) into a review queue:
+
+### 1. Real-time Routing
+Entities are automatically routed to queues in real-time based on configured rules and triggers.
+
+### 2. Rule-Based Evaluation 
+When a rule's conditions are met, the matching entity is added to the specified queue. Note that rules must be active (not in shadow mode).
+
+### 3. Risk Level Thresholds
+Entities are automatically queued when they meet defined risk level thresholds. For example, all transactions with "high" risk scores.
+
+### 4. Manual Addition
+Analysts can manually add entities to queues while reviewing sessions through the dashboard interface.
+
+Additionally, Swift runs routine batch monitoring to analyze historical transactions and may add entities to review queues based on pattern detection.
+
+### Routing Rules
+
+Define how alerts are routed to specific queues:
+- Risk score thresholds
+- Transaction amount ranges
+- Customer segments
+- Geographic regions
+- Custom rule combinations
+
+### Team Management
+- Assign reviewers to specific queues
+- Set workload distribution rules
+- Configure backup reviewers
+- Set working hours and coverage
+
+## Working with Queues
+
+### Alert Review Process
+1. Alerts are automatically routed based on rules
+2. Reviewers see prioritized cases in their queue
+3. Each alert contains relevant context and data
+4. Decisions and notes are logged for audit
+5. Cases can be escalated or reassigned
+
+### Queue Analytics
+Monitor queue performance with metrics like:
+- Average resolution time
+- Queue volumes and trends
+- False positive rates
+- Reviewer productivity
+- Risk detection accuracy
+
+### Best Practices
+- Regular queue rule optimization
+- Team performance monitoring
+- SLA tracking and management
+- Quality assurance reviews
+- Training and calibration
+
+## Integration Options
+
+### API Access
+- Programmatically create and manage queues
+- Automate alert routing
+- Pull queue statistics and metrics
+- Integrate with existing systems
+
+### Webhook Notifications
+- Real-time alerts for high priority cases
+- Team notifications for SLA breaches
+- Status change notifications
+- Custom event triggers
+
+## Advanced Features
+
+### Machine Learning Enhancement
+- Automated risk scoring
+- Pattern detection
+- Queue optimization suggestions
+- Workload prediction
+
+### Customization Options
+- Custom fields and attributes
+- Workflow automation rules
+- Team-specific views
+- Report customization
+
+Contact your Swift account manager to learn more about advanced queue features or to optimize your queue configuration.

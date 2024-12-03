@@ -1,0 +1,94 @@
+---
+title: Sandbox
+---
+
+# Swift Sandbox Environment
+
+Our sandbox environment allows you to test Swift's deposit analytics and fraud detection capabilities in a safe, simulated environment before integrating with your production systems.
+
+## Getting Started
+
+1. Request sandbox credentials by emailing [onboarding@joinswift.app](mailto:onboarding@joinswift.app)
+2. You'll receive API keys and access to the sandbox dashboard
+3. Use the sandbox API endpoints with your test data
+
+## Simulated Data Feeds
+
+The sandbox provides realistic simulated data streams that mirror production scenarios.
+
+## Example Sandbox Transaction and Risk Score Fetch
+
+This sandbox code POSTs to the account activity feed and fetches the risk score for a customer.
+
+```python
+import requests
+
+url = "https://api.sandbox.joinswift.app/v1/customer/account/activity"
+headers = {
+    "Authorization": "Bearer <your-api-key>"
+}
+response = requests.post(url, headers=headers, json={
+    "customer_id": "1234567890",
+    "start_date": "2024-01-01",
+    "end_date": "2024-01-31",
+    "activity_type": "login_attempt"
+})
+
+url = "https://api.sandbox.joinswift.app/v1/customer/fraud/risk-score"
+response = requests.get(url, headers=headers)
+print(response.json()["risk_score"])
+
+```
+
+
+### Account Activity Feed
+
+The sandbox simulates typical account activity patterns including:
+
+- Account openings and closures
+- Balance changes and transfers
+- Login events and session data
+- Profile updates
+- Card activations
+- Service enrollments
+
+### Fraud Event Feed
+
+The sandbox generates synthetic fraud scenarios such as:
+
+- Account takeover attempts
+- Suspicious login patterns
+- Unusual device fingerprints
+- High-risk transactions
+- Known fraud patterns
+- Synthetic identity markers
+
+### Customer Interaction Feed
+
+The sandbox provides simulated customer interaction data including:
+
+- Support ticket creation
+- Chat transcripts
+- Dispute filings
+- Document uploads
+- Password resets
+- Contact information changes
+
+### Deposit Analytics Feed
+
+Our deposit analytics sandbox generates synthetic transaction data that simulates real-world deposit patterns, including:
+
+- Regular payroll deposits
+- Large wire transfers
+- ACH transactions
+- Mobile check deposits
+- Cash deposits
+- International transfers
+
+The feed includes metadata like:
+
+- Account identifiers
+- Transaction amounts
+- Transaction types
+- Timestamps
+- Geographical locations

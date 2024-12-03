@@ -1,0 +1,118 @@
+---
+title: Fivetran Integration
+---
+
+## Setting Up Fivetran with Swift and Snowflake
+
+This guide walks through configuring Fivetran to stream data from your Snowflake database to Swift's analytics platform. Fivetran provides reliable, automated data pipelines that help ensure your Swift analytics are always up-to-date.
+
+### Prerequisites
+
+Before beginning the integration, ensure you have:
+- A Fivetran account with appropriate permissions
+- Access to your Snowflake database
+- Your Swift API credentials
+- Necessary database permissions to create connections
+
+### Helpful Links
+
+<CardGroup cols={2}>
+  <Card
+    title="Fivetran Documentation"
+    icon="book"
+    href="https://fivetran.com/docs"
+  >
+    Official Fivetran documentation and guides
+  </Card>
+  <Card
+    title="Snowflake Integration Guide" 
+    icon="snowflake"
+    href="https://fivetran.com/docs/databases/snowflake"
+  >
+    Detailed steps for connecting Snowflake
+  </Card>
+  <Card
+    title="Swift API Reference"
+    icon="code"
+    href="/api-reference"
+  >
+    API documentation for Swift integration
+  </Card>
+  <Card
+    title="Contact Support"
+    icon="headset"
+    href="mailto:support@joinswift.app"
+  >
+    Get help with your integration
+  </Card>
+</CardGroup>
+
+### Step 1: Configure Snowflake Source
+
+First, set up your Snowflake database as a source in Fivetran:
+
+1. Log into your Fivetran dashboard
+2. Click "Add Connector" and select Snowflake
+3. Enter your Snowflake connection details:
+   - Warehouse name
+   - Account name
+   - Database name
+   - Username
+   - Password
+4. Select the schemas and tables you want to sync
+5. Configure sync frequency based on your needs
+
+### Step 2: Create Swift Destination
+
+Next, configure Swift as a destination for your Fivetran pipeline:
+
+1. In Fivetran, go to "Destinations" and click "Add Destination"
+2. Select "Swift Analytics Platform" from the destinations list
+3. Enter your Swift API credentials:
+   - API Key
+   - API Secret
+   - Region
+4. Choose your preferred data sync method:
+   - Batch upload (recommended for large datasets)
+   - Real-time streaming (for time-sensitive analytics)
+
+### Step 3: Map Data Fields
+
+Configure how your Snowflake data maps to Swift's analytics fields:
+
+1. Go to the "Field Mapping" section
+2. Map required Swift fields:
+   - Customer ID
+   - Transaction Amount
+   - Timestamp
+   - Account Details
+3. Set up any custom field mappings
+4. Configure data transformations if needed
+
+### Step 4: Test the Connection
+
+Before going live, test your Fivetran pipeline:
+
+1. Click "Test Connection" to verify credentials
+2. Run a sample sync to validate data flow
+3. Check Swift dashboard to confirm data appears correctly
+4. Review any error logs or warnings
+
+### Step 5: Monitor and Maintain
+
+Once live, maintain your integration:
+
+1. Set up monitoring alerts in Fivetran
+2. Configure failure notifications
+3. Regularly review sync logs
+4. Monitor data quality in Swift dashboard
+5. Update mappings as schema changes occur
+
+### Troubleshooting
+
+Common issues and solutions:
+
+- **Connection Failures**: Verify network access and credentials
+- **Sync Errors**: Check field mappings and data types
+- **Performance Issues**: Review sync frequency and data volume
+- **Missing Data**: Validate source table permissions

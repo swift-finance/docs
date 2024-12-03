@@ -1,0 +1,70 @@
+---
+title: What Powers Swift
+---
+
+Learn more about the technology and data we use to provide state-of-the-art fraud and compliance risk prevention.
+
+## AI-Powered Deposit Analytics
+
+Swift's deposit analytics engine is powered by a combination of advanced machine learning models and real-time data processing infrastructure. 
+By leveraging [AWS Glue](https://docs.aws.amazon.com/glue) for ETL operations and [Apache Kafka](https://kafka.apache.org/) for real-time 
+streaming, we process millions of transactions per second to identify patterns and trends.
+
+Our analytics pipeline integrates with:
+- Transaction data streams
+- Account metadata
+- Historical deposit patterns
+- Market indicators
+- Customer chat logs
+- Customer support tickets
+
+The processed data is then analyzed by our ML models, which are fine-tuned using Claude 3.5 LLMs to extract meaningful insights. These models help financial institutions:
+
+- Predict deposit volatility
+- Identify seasonal patterns
+- Detect unusual withdrawal behavior
+- Forecast liquidity needs
+
+The insights are delivered through both our REST API and real-time webhooks, allowing seamless integration with your existing systems. For implementation details, see our [API Reference](api-reference/introduction).
+
+## Device Intelligence & Behavior Biometrics Risk SDK
+
+Our advanced Risk SDK detects high-risk devices and behavioral anomalies. Utilizing the collected data, we can accurately 
+identify and flag suspicious devices and sessions involved in creating synthetic accounts, account takeovers, and funding accounts 
+with stolen payment methods. The Risk SDK is compatible with both web and native applications.
+
+
+## Machine Learning
+
+At the core of Swift's fraud prevention capabilities lies our innovative approach to machine learning model development. 
+We've pioneered a collaborative network that pools anonymized fraud data across financial institutions, enabling us to build 
+highly sophisticated supervised learning models. This shared intelligence means that when fraudsters target one institution, 
+our models are already prepared to protect others from similar attacks. Beyond supervised learning, our platform employs 
+cutting-edge unsupervised learning algorithms that excel at identifying emerging fraud patterns and anomalous behaviors 
+before they become widespread threats.
+
+## No-Code or Low-Code Rule Development
+
+Swift's no-to-low-code Rule Editor empowers you to create and customize fraud prevention rules without writing any code. 
+Our platform comes with hundreds of pre-built rules that protect your business from day one, leveraging both standard 
+and custom data points. The real-time rule development environment allows you to respond rapidly to emerging threats and 
+stop fraudulent activities as they occur.
+
+Before deploying new rules, you can evaluate their effectiveness using our shadow-mode feature. This allows you to test 
+and refine rules by monitoring their performance against real traffic without impacting your production environment. 
+Once you're confident in a rule's accuracy, you can seamlessly transition it into active enforcement.
+
+
+## Integrated Dashboard
+Our integrated dashboard provides a unified view for visualizing and investigating potential threats while monitoring known bad actors. The customer-centric interface gives you complete access to:
+
+- Device and session data analytics
+- Checkpoint and rule configurations
+- Real-time rule editing capabilities
+- Comprehensive reporting tools
+- Anomaly detection alerts
+- Block/allow list management
+- Alert review and remediation queues
+- Full user management and access controls
+
+This centralized platform serves as a complete command center for your risk and compliance operations, eliminating the need to switch between multiple tools and interfaces.

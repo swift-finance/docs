@@ -1,0 +1,17 @@
+This project is mock documentation I'm using to pitch a new product to a team.
+
+The document is written in markdown and uses mintlify to generate the website.
+
+The document describes a product called Swift with the following synposis:
+“Swift provides AI-powered analytics to financial institutions. Our platform helps 
+analyze deposit trends and detect account fraud using advanced machine learning models 
+and LLMs. We focus on transforming data into high-quality insights to improve 
+operational efficiency and customer experience.”
+
+The main features of the product are:
+- Deposit analytics
+- Account fraud detection
+- Data transformation
+- Insights generation
+
+The product is aimed at financial institutions and the target audience is the CTO or equivalent.

@@ -1,11 +1,8 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
-  "favicon": "/favicon.svg",
+  "name": "Swift Finance Analytics Platform",
+  "logo": "/logo/Logo Text.png",
+  "favicon": "/logo/Logo.png",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -18,74 +15,112 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@joinswift.app"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://accounts.joinswift.app"
   },
   "tabs": [
     {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "Knowledge Base",
+      "url": "knowledge-base"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "name": "Analytics Dashboard",
+      "url": "https://accounts.joinswift.app",
+      "icon": "chart-simple"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Contact Support",
+      "url": "mailto:support@joinswift.app",
+      "icon": "envelope"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "About Swift",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "What-Powers-Swift"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Getting Started",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "overview",
+        "Secure-Data-Connections",
+        "Sandbox",
+        "Integration-Overview",
+        "Risk-Score"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Guides",
       "pages": [
-        "api-reference/introduction"
+        "AWS-Kinesis",
+        "Fivetran"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Streaming",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/streaming/configure-aws-kinesis-stream-sink",
+        "api-reference/streaming/configure-fivetran-connector-sink",
+        "api-reference/streaming/list-configured-streaming-sinks"
+      ]
+    },
+    {
+      "group": "Risk Scoring",
+      "pages": [
+        "api-reference/risk-scoring/get-risk-score-for-an-object"
+      ]
+    },
+    {
+      "group": "Events",
+      "pages": [
+        "api-reference/log-custom-event",
+        "api-reference/get-analytics-and-insights-across-all-event-types"
+      ]
+    },
+    {
+      "group": "Account Activity",
+      "pages": [
+        "api-reference/account-activity/retrieve-account-activity-events",
+        "api-reference/account-activity/log-account-activity-event",
+        "api-reference/account-activity/log-authentication-event",
+        "api-reference/account-activity/log-password-reset-event"
+      ]
+    },
+    {
+      "group": "Transfer Activity",
+      "pages": [
+        "api-reference/transfer-activity/retrieve-ach-transfer-events",
+        "api-reference/transfer-activity/log-ach-transfer-event",
+        "api-reference/transfer-activity/log-outbound-transfer-event"
+      ]
+    },
+    {
+      "group": "Support Activity",
+      "pages": [
+        "api-reference/support-activity/retrieve-chat-events",
+        "api-reference/support-activity/log-customer-chat-event",
+        "api-reference/support-activity/retrieve-support-ticket-events",
+        "api-reference/support-activity/log-support-ticket-event"
+      ]
+    },
+    {
+      "group": "Knowledge Base",
+      "pages": [
+        "knowledge-base/AlertReviewQueues"
       ]
     }
-  ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+  ]
 }
